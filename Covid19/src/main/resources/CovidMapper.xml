@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.selsoft.rts.common.mapper.CommonMapper">
+
+	<insert id="addNewUser"
+		parameterType="com.lucas.covid19.models.User" useGeneratedKeys="true"
+		keyProperty="userId" keyColumn="userId">
+		INSERT INTO
+		User
+		(fullName,
+		email,
+		phoneNumber,
+		password,
+		userType)
+		VALUES
+		(#{fullName},
+		#{email},
+		#{phoneNumber},
+		#{password},
+		#{userType})
+	</insert>
+
+</mapper>
