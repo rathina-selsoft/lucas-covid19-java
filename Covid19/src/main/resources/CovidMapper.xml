@@ -21,6 +21,15 @@
 		#{password},
 		#{userType})
 	</insert>
+	
+	<select id="findUserById" parameterType="java.lang.Integer"
+		resultType="com.lucas.covid19.models.User">
+		SELECT *
+		FROM User
+		where
+		userId =
+		#{value}
+	</select>
 
 	<select id="findUserByEmail" parameterType="java.lang.String"
 		resultType="com.lucas.covid19.models.User">
@@ -39,5 +48,35 @@
 		phoneNumber =
 		#{value}
 	</select>
+
+	<insert id="addFoodRequest"
+		parameterType="com.lucas.covid19.models.FoodRequest"
+		useGeneratedKeys="true" keyProperty="foodId" keyColumn="foodId">
+		INSERT INTO
+		FoodRequest
+		(
+		fullName,
+		phoneNumber,
+		address,
+		latitude,
+		longitude,
+		date,
+		dateLong,
+		time,
+		timeLong,
+		enteredBy)
+		VALUES
+		(
+		#{fullName},
+		#{phoneNumber},
+		#{address},
+		#{latitude},
+		#{longitude},
+		#{date},
+		#{dateLong},
+		#{time},
+		#{timeLong},
+		#{enteredBy})
+	</insert>
 
 </mapper>

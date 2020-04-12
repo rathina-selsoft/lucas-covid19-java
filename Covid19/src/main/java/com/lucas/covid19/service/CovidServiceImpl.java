@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.lucas.covid19.exceptions.CovidException;
 import com.lucas.covid19.mapper.CovidMapper;
+import com.lucas.covid19.models.FoodRequest;
 import com.lucas.covid19.models.User;
 
 @Service("covidService")
@@ -70,6 +71,43 @@ public class CovidServiceImpl implements CovidService {
 		}
 		
 		return userEmail;
+	}
+
+	@Override
+	public FoodRequest addFoodRequest(FoodRequest foodRequest) throws Throwable {
+		if (foodRequest.getEnteredBy() == 0) {
+			throw new CovidException("Validation Error!", "Food entered is missing!");
+		}
+		
+		User user = covidMapper.findUserById(foodRequest.getEnteredBy());
+		if (user == null) {
+			throw new CovidException("Validation Error!", "User not found!");
+		}
+		
+		if (StringUtils.isBlank(foodRequest.getFullName())) {
+			throw new CovidException("Validation Error!", "Name not found!");
+		}
+		
+		if (StringUtils.isBlank(foodRequest.getPhoneNumber())) {
+			throw new CovidException("Validation Error!", "Phone Number not found!");
+		}
+		
+		if (StringUtils.isBlank(foodRequest.getAddress())) {
+			if (foodRequest.getLatitude() == 0 || foodRequest.getLongitude() == 0) {
+				throw new CovidException("Validation Error!", "Please enable current location");
+			}
+		}
+		
+		if (foodRequest.getDateLong() == 0) {
+			throw new CovidException("Validation Error!", "Date is empty!");
+		}
+		
+		if (foodRequest.getTimeLong() == 0) {
+			throw new CovidException("Validation Error!", "Time is empty!");
+		}
+		
+		covidMapper.addFoodRequest(foodRequest);
+		return foodRequest;
 	}
 
 }
