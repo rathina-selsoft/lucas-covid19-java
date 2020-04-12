@@ -48,5 +48,32 @@ public class CovidController {
 		return jsonObject.toString();
 
 	}
+	
+	@RequestMapping(value = "/userLogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String userLogin(HttpServletRequest request, HttpServletResponse httpResponse, @RequestBody User user) {
+
+		JSONObject jsonObject = new JSONObject();
+		try {
+
+			httpResponse.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+
+			user = covidService.userLogin(user);
+			
+			jsonObject.put("success", true);
+			jsonObject.put("user", user.toJSON());
+		} catch (CovidException e) {
+			jsonObject.put("success", false);
+			jsonObject.put("message", e.getError());
+		} catch (Exception e) {
+			jsonObject.put("success", false);
+			jsonObject.put("message", e.getMessage());
+		} catch (Throwable e) {
+			jsonObject.put("success", false);
+			jsonObject.put("message", e.getMessage());
+		}
+
+		return jsonObject.toString();
+
+	}
 
 }

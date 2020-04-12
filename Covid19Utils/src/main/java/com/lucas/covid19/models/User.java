@@ -25,7 +25,7 @@ public class User implements Serializable {
 	private int userId;
 
 	private String fullName;
-	private String email;
+	private String emailId;
 	private String phoneNumber;
 	private String password;
 	private int userType;
@@ -49,12 +49,12 @@ public class User implements Serializable {
 		this.fullName = fullName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public String getPhoneNumber() {
@@ -109,7 +109,7 @@ public class User implements Serializable {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("userId", this.userId);
 		jsonObject.put("fullName", this.fullName);
-		jsonObject.put("email", this.email);
+		jsonObject.put("emailId", this.emailId);
 		jsonObject.put("phoneNumber", this.phoneNumber);
 		jsonObject.put("userType", this.userType);
 		return jsonObject;

@@ -9,4 +9,6 @@ public interface CovidService {
 
 	User addUser(User user) throws Throwable;
 
+	User userLogin(User user) throws Throwable;
+
 }

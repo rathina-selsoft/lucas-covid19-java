@@ -9,4 +9,8 @@ public interface CovidMapper {
 
 	void addNewUser(User user) throws Throwable;
 
+	User findUserByEmail(String emailId) throws Throwable;
+
+	User findUserByPhone(String phoneNumber) throws Throwable;
+
 }

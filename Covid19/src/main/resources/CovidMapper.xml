@@ -2,7 +2,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.selsoft.rts.common.mapper.CommonMapper">
+<mapper namespace="com.lucas.covid19.mapper.CovidMapper">
 
 	<insert id="addNewUser"
 		parameterType="com.lucas.covid19.models.User" useGeneratedKeys="true"
@@ -10,16 +10,34 @@
 		INSERT INTO
 		User
 		(fullName,
-		email,
+		emailId,
 		phoneNumber,
 		password,
 		userType)
 		VALUES
 		(#{fullName},
-		#{email},
+		#{emailId},
 		#{phoneNumber},
 		#{password},
 		#{userType})
 	</insert>
+
+	<select id="findUserByEmail" parameterType="java.lang.String"
+		resultType="com.lucas.covid19.models.User">
+		SELECT *
+		FROM User
+		where
+		emailId =
+		#{value}
+	</select>
+
+	<select id="findUserByPhone" parameterType="java.lang.String"
+		resultType="com.lucas.covid19.models.User">
+		SELECT *
+		FROM User
+		where
+		phoneNumber =
+		#{value}
+	</select>
 
 </mapper>
