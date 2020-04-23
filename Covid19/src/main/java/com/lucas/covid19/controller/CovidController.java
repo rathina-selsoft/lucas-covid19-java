@@ -95,6 +95,7 @@ public class CovidController {
 			jsonObject.put("success", false);
 			jsonObject.put("message", e.getError());
 		} catch (Exception e) {
+			e.printStackTrace();
 			jsonObject.put("success", false);
 			jsonObject.put("message", e.getMessage());
 		} catch (Throwable e) {

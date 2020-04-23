@@ -165,7 +165,8 @@ public class FoodRequest implements Serializable {
 		jsonObject.put("time", this.time);
 		jsonObject.put("timeLong", this.timeLong);
 		jsonObject.put("enteredBy", this.enteredBy);
-		jsonObject.put("user", this.user.toJSON());
+		if (user != null)
+			jsonObject.put("user", this.user.toJSON());
 		return jsonObject;
 	}
 
