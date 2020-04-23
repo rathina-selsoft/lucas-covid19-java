@@ -4,6 +4,25 @@
 
 <mapper namespace="com.lucas.covid19.mapper.CovidMapper">
 
+	<resultMap type="com.lucas.covid19.models.FoodRequest"
+		id="FoodRequestMap">
+		<id property="foodId" column="foodId" />
+		<result property="fullName" column="fullName" />
+		<result property="phoneNumber" column="phoneNumber" />
+		<result property="address" column="address" />
+		<result property="latitude" column="latitude" />
+		<result property="longitude" column="longitude" />
+		<result property="date" column="date" />
+		<result property="dateLong" column="dateLong" />
+		<result property="time" column="time" />
+		<result property="timeLong" column="timeLong" />
+		<result property="createdAt" column="createdAt" />
+
+		<!-- User Object -->
+		<association property="user" column="enteredBy"
+			javaType="User" select="findUserById" />
+	</resultMap>
+
 	<insert id="addNewUser"
 		parameterType="com.lucas.covid19.models.User" useGeneratedKeys="true"
 		keyProperty="userId" keyColumn="userId">
@@ -21,10 +40,10 @@
 		#{password},
 		#{userType})
 	</insert>
-	
+
 	<select id="findUserById" parameterType="java.lang.Integer"
 		resultType="com.lucas.covid19.models.User">
-		SELECT *
+		SELECT userId, fullName, emailId, phoneNumber, userType
 		FROM User
 		where
 		userId =
@@ -78,5 +97,17 @@
 		#{timeLong},
 		#{enteredBy})
 	</insert>
+
+	<select id="filterFoodRequestByUserId" parameterType="map"
+		resultType="com.lucas.covid19.models.FoodRequest">
+		SELECT * FROM FoodRequest where enteredBy = ${userId} AND
+		(createdAt between #{fromDate} AND #{toDate})
+	</select>
+
+	<select id="filterFoodRequestByDate" parameterType="map"
+		resultType="com.lucas.covid19.models.FoodRequest">
+		SELECT * FROM FoodRequest where createdAt between
+		#{fromDate} AND #{toDate}
+	</select>
 
 </mapper>

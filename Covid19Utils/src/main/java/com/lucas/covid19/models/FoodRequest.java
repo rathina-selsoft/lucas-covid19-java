@@ -33,7 +33,10 @@ public class FoodRequest implements Serializable {
 	private long dateLong;
 	private String time;
 	private long timeLong;
+
 	private int enteredBy;
+	private User user;
+
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 
@@ -140,7 +143,15 @@ public class FoodRequest implements Serializable {
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public JSONObject toJSON() {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("foodId", this.foodId);
@@ -154,6 +165,7 @@ public class FoodRequest implements Serializable {
 		jsonObject.put("time", this.time);
 		jsonObject.put("timeLong", this.timeLong);
 		jsonObject.put("enteredBy", this.enteredBy);
+		jsonObject.put("user", this.user.toJSON());
 		return jsonObject;
 	}
 
